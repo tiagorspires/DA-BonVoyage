@@ -1,17 +1,17 @@
 public class Vehicle {
-    private String origin;
-    private String destiny;
+    private int origin;
+    private int destiny;
     private int capacity;
     private int duration; // in hours
 
-    public Vehicle(String origin, String destiny, int capacity, int duration) {
+    public Vehicle(int origin, int destiny, int capacity, int duration) {
         this.origin = origin;
         this.destiny = destiny;
         this.capacity = capacity;
         this.duration = duration;
     }
 
-    public String getOrigin() {
+    public int getOrigin() {
         return origin;
     }
 
@@ -25,15 +25,15 @@ public class Vehicle {
                 '}';
     }
 
-    public void setOrigin(String origin) {
+    public void setOrigin(int origin) {
         this.origin = origin;
     }
 
-    public String getDestiny() {
+    public int getDestiny() {
         return destiny;
     }
 
-    public void setDestiny(String destiny) {
+    public void setDestiny(int destiny) {
         this.destiny = destiny;
     }
 
