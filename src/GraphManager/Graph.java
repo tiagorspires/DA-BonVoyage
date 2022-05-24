@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+/*
+*  Directed and Weighted Graph
+*   Each node is numbered from 1 to N (number of nodes)
+* */
+
 
 public class Graph {
     int vertices;
