@@ -23,7 +23,17 @@ public class Graph {
     }
 
     public void addEdge(int source, int destination, int weight) {
-        Edge edge = new Edge(source, destination, weight);
+        Edge edge = new Edge(destination, weight);
         adjacencylist[source].addFirst(edge); //for directed graph
+    }
+
+    public void printGraph(){
+        for (int i = 0; i <vertices ; i++) {
+            LinkedList<Edge> list = adjacencylist[i];
+            for (int j = 0; j <list.size() ; j++) {
+                System.out.println(" " + i + " ---> " +
+                        list.get(j).destination + " w(" + list.get(j).weight + ")");
+            }
+        }
     }
 }

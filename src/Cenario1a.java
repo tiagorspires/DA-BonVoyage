@@ -2,6 +2,7 @@ public class Cenario1a {
     static int[][] solGraph;
 
     public static int execute(int[][] graph,int start,int end){
+        initSolGraph();
         if(start == end) return Integer.MAX_VALUE;
         int max = 0;
         for (int i = 0;i < graph.length;i++){
@@ -20,5 +21,14 @@ public class Cenario1a {
         }
 
         return max;
+    }
+
+    private static void initSolGraph() {
+        solGraph = new int[BonVoyage.Nodes_num][BonVoyage.Nodes_num];
+        for(int i = 0; i < BonVoyage.Nodes_num; i++){
+            for(int j = 0; j< BonVoyage.Nodes_num; j++){
+                solGraph[i][j] = 0;
+            }
+        }
     }
 }
