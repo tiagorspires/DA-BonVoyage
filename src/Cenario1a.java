@@ -1,3 +1,5 @@
+import java.util.LinkedList;
+
 public class Cenario1a {
     static int[][] solGraph;
     static int maxFlow;
