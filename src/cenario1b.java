@@ -1,4 +1,7 @@
-public class Cenario1a {
+import java.util.LinkedList;
+
+public class cenario1b {
+
     static int[][] solGraph;
     static int maxFlow;
 
@@ -49,7 +52,7 @@ public class Cenario1a {
 
     private static void initSolGraph(int start, int end) {
         solGraph = new int[BonVoyage.Nodes_num][BonVoyage.Nodes_num];
-       //while (start)
+        //while (start)
     }
 
 }

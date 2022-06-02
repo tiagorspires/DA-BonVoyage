@@ -12,13 +12,14 @@ public class BonVoyage {
         vehicleList = new ArrayList<>();
         Menu.displayMenu();
 
-        Cenario1a.solGraph = new int[5][5];
-        for (int i = 0;i < 5;i++){
-            for (int j = 0;j <5;j++){
-                Cenario1a.solGraph[i][j] = 0;
-            }
-        }
-        System.out.println(Cenario1a.execute(graph,0,7));
+        int[][] graph= {
+            {0,4,3,0,0},
+            {0,0,0,5,0},
+            {0,3,0,0,3},
+            {0,0,2,0,4},
+            {0,0,0,0,0}};
+
+        Cenario1a.execute(graph,0,4);
 
 
     }
