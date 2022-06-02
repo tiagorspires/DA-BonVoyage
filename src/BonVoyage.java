@@ -18,7 +18,6 @@ public class BonVoyage {
             {0,3,0,0,3},
             {0,0,2,0,4},
             {0,0,0,0,0}};
-
         Cenario1a.execute(graph,0,4);
 
 

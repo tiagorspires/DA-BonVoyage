@@ -1,9 +1,13 @@
+import java.util.Arrays;
 import java.util.LinkedList;
+
+import static java.lang.Integer.MAX_VALUE;
 
 public class cenario1b {
 
     static int[][] solGraph;
     static int maxFlow;
+
 
     public static void execute(int[][] graph,int start,int end){
         maxFlow = maxFlow(graph,start,end);
@@ -11,7 +15,7 @@ public class cenario1b {
     }
 
     private static int maxFlow(int[][] graph, int start, int end){
-        if(start == end) return Integer.MAX_VALUE;
+        if(start == end) return MAX_VALUE;
         int max = 0;
         for (int i = 0;i < graph.length;i++){
             if (graph[start][i] > 0){
@@ -37,16 +41,22 @@ public class cenario1b {
 
     private static LinkedList<Integer> findPath(int[][] graph, int start, int end){
         LinkedList<Integer> path = new LinkedList<>();
+        LinkedList<Integer> max = new LinkedList<>();
+        int size = MAX_VALUE;
         path.add(start);
-        while(start != end){
+        if(start != end){
             for (int i = 0;i < graph.length;i++){
                 if (graph[start][i] >= maxFlow) {
-                    start = i;
-                    path.add(i);
-                    break;
+                    LinkedList<Integer> temp = findPath(graph,i,end);
+                    if (temp.size() < size){
+                        max = temp;
+                    }
+
                 }
             }
+            path.addAll(max);
         }
+
         return path;
     }
 
