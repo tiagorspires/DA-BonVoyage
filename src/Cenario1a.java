@@ -5,8 +5,10 @@ public class Cenario1a {
     static int maxFlow;
 
     public static void execute(int[][] graph,int start,int end){
+        initSolGraph(graph.length);
         maxFlow = maxFlow(graph,start,end);
-        findPath(graph,start,end);
+        System.out.println(maxFlow);
+        System.out.println(findPath(graph,start,end));
     }
 
     private static int maxFlow(int[][] graph, int start, int end){
@@ -37,6 +39,7 @@ public class Cenario1a {
     private static LinkedList<Integer> findPath(int[][] graph, int start, int end){
         LinkedList<Integer> path = new LinkedList<>();
         path.add(start);
+
         while(start != end){
             for (int i = 0;i < graph.length;i++){
                 if (graph[start][i] >= maxFlow) {
@@ -49,9 +52,9 @@ public class Cenario1a {
         return path;
     }
 
-    private static void initSolGraph(int start, int end) {
-        solGraph = new int[BonVoyage.Nodes_num][BonVoyage.Nodes_num];
-       //while (start)
+    private static void initSolGraph(int size) {
+        solGraph = new int[size][size];
+
     }
 
 }

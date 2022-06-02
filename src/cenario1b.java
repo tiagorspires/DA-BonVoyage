@@ -1,5 +1,6 @@
 import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.List;
 
 import static java.lang.Integer.MAX_VALUE;
 
@@ -10,8 +11,12 @@ public class cenario1b {
 
 
     public static void execute(int[][] graph,int start,int end){
+        initSolGraph(graph.length);
         maxFlow = maxFlow(graph,start,end);
-        findPath(graph,start,end);
+        System.out.println(maxFlow);
+        List a = findPath(graph,start,end);
+        System.out.println(a);
+        System.out.println(a.size()-1);
     }
 
     private static int maxFlow(int[][] graph, int start, int end){
@@ -60,9 +65,8 @@ public class cenario1b {
         return path;
     }
 
-    private static void initSolGraph(int start, int end) {
-        solGraph = new int[BonVoyage.Nodes_num][BonVoyage.Nodes_num];
-        //while (start)
+    private static void initSolGraph(int size) {
+        solGraph = new int[size][size];
     }
 
 }

@@ -10,15 +10,15 @@ public class BonVoyage {
 
     public static void main(String[] args) {
         vehicleList = new ArrayList<>();
-        Menu.displayMenu();
+        //Menu.displayMenu();
 
         int[][] graph= {
-            {0,4,3,0,0},
-            {0,0,0,5,0},
-            {0,3,0,0,3},
-            {0,0,2,0,4},
-            {0,0,0,0,0}};
-        Cenario1a.execute(graph,0,4);
+            {0,3,0,2},
+            {0,0,2,0},
+            {0,0,0,2},
+            {0,0,0,0}};
+        //Cenario1a.execute(graph,0,4);
+        cenario1b.execute(graph,0,3);
 
 
     }
