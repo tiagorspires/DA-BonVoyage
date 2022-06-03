@@ -1,3 +1,5 @@
+package Cenario1;
+
 public class Cenario1 {
     /* 1.1. Maximizar a dimensão do grupo e indicar um qualquer encaminhamento.
        1.2. Maximizar a dimensão do grupo e minimizar o número de transbordos, sem privilegiar um dos

@@ -1,3 +1,5 @@
+package Cenario1;
+
 import GraphManager.Graph;
 
 import java.util.LinkedList;

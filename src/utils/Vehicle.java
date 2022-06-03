@@ -1,3 +1,5 @@
+package utils;
+
 public class Vehicle {
     private int origin;
     private int destiny;
@@ -17,7 +19,7 @@ public class Vehicle {
 
     @Override
     public String toString() {
-        return "Vehicle{" +
+        return "utils.Vehicle{" +
                 "origin='" + origin + '\'' +
                 ", destiny='" + destiny + '\'' +
                 ", capacity=" + capacity +
