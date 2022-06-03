@@ -31,7 +31,7 @@ public class BonVoyage {
             {0,0,0,0,0}};
 
         //Cenario1a.execute(graph,0,4);
-        Cenario1b.execute(graph,0,4);
+        Cenario2a.execute(graph,0,4);
 
 
     }
