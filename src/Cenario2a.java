@@ -1,42 +1,53 @@
-import java.util.Arrays;
 import java.util.LinkedList;
-import java.util.List;
+
 
 import static java.lang.Integer.MAX_VALUE;
 
-public class cenario1b {
-
+public class Cenario2a {
     static int[][] solGraph;
     static int maxFlow;
-
+    LinkedList<Integer> path;
 
     public static void execute(int[][] graph,int start,int end){
         initSolGraph(graph.length);
         maxFlow = maxFlow(graph,start,end);
         System.out.println(maxFlow);
-        List a = findPath(graph,start,end);
-        System.out.println(a);
-        System.out.println(a.size()-1);
+        System.out.println(findPath(graph,start,end));
+    }
+
+    private static void initSolGraph(int size) {
+        solGraph = new int[size][size];
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                solGraph[i][j] = 0;
+            }
+        }
     }
 
     private static int maxFlow(int[][] graph, int start, int end){
         if(start == end) return MAX_VALUE;
         int max = 0;
         for (int i = 0;i < graph.length;i++){
+            //checking if there is a connection 'start' --> 'i'
             if (graph[start][i] > 0){
+                // if the next node is the end return the value of the branch
                 if (i == end){
                     solGraph[start][i] = graph[start][i];
                     return graph[start][i];
                 }
+                // if the solGraph is bigger than zero it means that the solution for the branch has already been calculated
                 if (solGraph[start][i] > 0){
                     return solGraph[start][i];
-                }else if (solGraph[start][i] == -1){
+                }
+                //if is set to -1 it means that the branch has already been called but the solution has not been found
+                //meaning that the method went in a cycle || the graph is cyclic
+                else if (solGraph[start][i] == -1){
                     return 0;
                 }else{
                     solGraph[start][i] = -1;
                     int temp = Math.min(graph[start][i], maxFlow(graph, i, end));
-                    solGraph[start][i] = max;
                     max = Math.max(temp,max);
+                    solGraph[start][i] = max;
                 }
             }
         }
@@ -64,9 +75,5 @@ public class cenario1b {
 
         return path;
     }
-
-    private static void initSolGraph(int size) {
-        solGraph = new int[size][size];
-    }
-
 }
+

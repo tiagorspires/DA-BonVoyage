@@ -12,14 +12,14 @@ public class InputReader {
         reader = new Scanner(inputFile);
         BonVoyage.Nodes_num = reader.nextInt();
         int vehicles = reader.nextInt();
-        BonVoyage.graph = new int[BonVoyage.Nodes_num][BonVoyage.Nodes_num];
+        BonVoyage.grapho = new int[BonVoyage.Nodes_num][BonVoyage.Nodes_num];
         for(int i = 0; i < vehicles; i++){
             int origin = reader.nextInt();
             int destiny = reader.nextInt();
             int capacity = reader.nextInt();
             int cost = reader.nextInt();
             BonVoyage.vehicleList.add(new Vehicle(origin, destiny, capacity, cost));
-            BonVoyage.graph[origin-1][destiny-1] = capacity;
+            BonVoyage.grapho[origin-1][destiny-1] = capacity;
         }
         reader.close();
     }
