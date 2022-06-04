@@ -4,6 +4,7 @@ import GraphManager.Graph;
 import java.util.LinkedList;
 
 import static java.lang.Integer.MAX_VALUE;
+import static java.lang.Integer.MIN_VALUE;
 
 public class Cenario1b {
 
@@ -78,6 +79,7 @@ public class Cenario1b {
         LinkedList<Integer> min = new LinkedList<>();
         int m = MAX_VALUE;
         path.add(start);
+        int max = 0;
         if (start != end) {
             for (int i = 0; i < graph.NumVertices; i++) {
                 if (graph.getWeightOnEdge(start, i) > 0) {
