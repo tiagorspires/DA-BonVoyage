@@ -1,6 +1,7 @@
 package GraphManager;
 
 import java.util.LinkedList;
+import java.util.List;
 /*
 *  Directed and Weighted Graph
 *   Each node is numbered from 1 to N (number of nodes)
@@ -22,6 +23,10 @@ public class Graph {
     public void addEdge(int source, int destination, int weight) {
         Edge edge = new Edge(destination, weight);
         graph[source].addEdge(edge); //for directed graph
+    }
+
+    public List<Edge> getEdgeList(int source){
+        return graph[source].getAdjacentes();
     }
 
     public int getWeightOnEdge(int source, int destination){

@@ -1,9 +1,10 @@
 package Cenario2;
 
-import Cenario1.Cenario1b;
+import GraphManager.Edge;
 import GraphManager.Graph;
 
 import java.util.LinkedList;
+import java.util.List;
 
 
 import static java.lang.Integer.MAX_VALUE;

@@ -14,4 +14,8 @@ public class Vertex {
     public void addEdge(Edge novo){
         adjacentes.add(novo);
     }
+
+    public LinkedList<Edge> getAdjacentes() {
+        return adjacentes;
+    }
 }

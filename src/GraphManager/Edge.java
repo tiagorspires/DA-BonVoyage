@@ -9,6 +9,21 @@ public class Edge implements Comparable<Edge>{
         this.weight = weight;
     }
 
+    @Override
+    public String toString() {
+        return "Edge{" +
+                "destination=" + destination +
+                ", weight=" + weight +
+                '}';
+    }
+
+    public int getDestination() {
+        return destination;
+    }
+
+    public int getWeight() {
+        return weight;
+    }
 
     @Override
     public int compareTo(Edge o) {
