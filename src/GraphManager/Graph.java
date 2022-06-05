@@ -30,21 +30,20 @@ public class Graph {
     }
 
     public int getWeightOnEdge(int source, int destination){
-        for (Edge edge: graph[source].adjacentes) {
+        List<Edge> edges = getEdgeList(source);
+        for (Edge edge: edges) {
             if(destination == edge.destination)
                 return edge.weight;
         }
         return 0;
     }
 
-
-
     public void printGraph(){
         for (int source = 0; source < NumVertices; source++) {
             LinkedList<Edge> list = graph[source].adjacentes;
-            for (int j = 0; j <list.size() ; j++) {
+            for (Edge edge : list) {
                 System.out.println(" " + source + " ---> " +
-                        list.get(j).destination + " w(" + list.get(j).weight + ")");
+                        edge.destination + " w(" + edge.weight + ")");
             }
         }
     }

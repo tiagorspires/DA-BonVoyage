@@ -1,11 +1,9 @@
-import Cenario1.Cenario1a;
+package Tests;
+
 import Cenario1.Cenario1b;
-import GraphManager.Edge;
 import GraphManager.Graph;
 
-import java.util.List;
-
-public class Test {
+public class TestCenario1 {
     int start = 0;
     int end = 5;
 

@@ -13,28 +13,36 @@ public class Cenario2a {
     static Graph solGraph;
     static int maxFlow;
     static LinkedList<Integer> path;
+    static LinkedList<LinkedList<Integer>> multiRoutes;
     static Graph graph;
 
     public static void execute(Graph graph,int start,int end, int size){
         solGraph = new Graph(graph.NumVertices);
+        multiRoutes = new LinkedList<>();
         forwardGroup(graph,start,end,size);
+        System.out.println(multiRoutes);
     }
 
     private static void forwardGroup(Graph graph, int start, int end, int size) {
-        LinkedList<LinkedList<Integer>> multiRoutes = new LinkedList<>();
         do{
-            int maxFlow = maxFlow(graph,start,end); // it searches the max flow single route to forward a section of the group
+            maxFlow = maxFlow(graph,start,end); // it searches the max flow single route to forward a section of the group
             LinkedList<Integer> singleRoute;
-            singleRoute = findPath(graph,start,end); // then it extracts the single path obtained and inserts it into the multi route
-            multiRoutes.add(singleRoute);
-            purgePath(singleRoute, maxFlow); // purges the single route obtained so it can not be chosen again in the next iteration of this function
-            size -= maxFlow;
+            if(maxFlow>0) {
+                singleRoute = findPath(solGraph, start, end); // then it extracts the single path obtained and inserts it into the multi route
+                multiRoutes.add(singleRoute);
+                purgePath(graph,singleRoute, maxFlow); // purges the single route obtained so it can not be chosen again in the next iteration of this function
+                size -= maxFlow;
+                solGraph = new Graph(graph.NumVertices);
+            }
         }while(size>0 && maxFlow > 0 );
+    }
+
+    private static void initSolGraph(int numVertices) {
 
     }
 
-    private static void purgePath(LinkedList<Integer> singleRoute, int maxFlow) {
-        List<Edge> mylist = solGraph.getEdgeList(singleRoute.get(0));
+    private static void purgePath(Graph graph,LinkedList<Integer> singleRoute, int maxFlow) {
+        List<Edge> mylist = graph.getEdgeList(singleRoute.get(0));
 
         //converted list to array to get constant complexity when getting a value
         int[] route = new int[singleRoute.size()];
@@ -82,22 +90,20 @@ public class Cenario2a {
     }
 
     private static LinkedList<Integer> findPath(Graph graph, int start, int end){
-        path = new LinkedList<>();
-        LinkedList<Integer> max = new LinkedList<>();
+        LinkedList<Integer> path = new LinkedList<>();
         path.add(start);
-        int maximo = MAX_VALUE;
-        if(start != end){
-            for (int i = 0;i < graph.NumVertices;i++){
-                if (graph.getWeightOnEdge(start,i) >= maxFlow) {
-                    LinkedList<Integer> temp = findPath(graph,i,end);
-                    if (temp.size() < maximo){
-                        max = temp;
-                        maximo = temp.size();
-                    }
+        List<Edge> graphEdgeList = graph.getEdgeList(start);
+        while(start != end){
+            for (Edge i:graphEdgeList){
+                if (i.getWeight() >= maxFlow) {
+                    start = i.getDestination();
+                    path.add(i.getDestination());
+                    graphEdgeList = graph.getEdgeList(i.getDestination());
+                    break;
                 }
             }
-            path.addAll(max);
         }
+
         return path;
     }
 }

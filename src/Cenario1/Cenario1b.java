@@ -84,7 +84,6 @@ public class Cenario1b {
 
 
     private static LinkedList<Integer> findMinTransbordPath(Graph graph, int start, int end) {
-
         LinkedList<Integer> path = new LinkedList<>();
         LinkedList<Integer> min = new LinkedList<>();
         List<Edge> edges = graph.getEdgeList(start);

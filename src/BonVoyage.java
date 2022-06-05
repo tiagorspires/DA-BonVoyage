@@ -1,5 +1,6 @@
-import Cenario1.*;
 import GraphManager.Graph;
+import Tests.TestCenario1;
+import Tests.TestCenario2;
 import utils.Vehicle;
 
 import java.util.ArrayList;
@@ -7,8 +8,6 @@ import java.util.ArrayList;
 public class BonVoyage {
     public static ArrayList<Vehicle> vehicleList;
     public static Graph graph;
-    static Test test = new Test();
-
 
     public static void main(String[] args) {
         vehicleList = new ArrayList<>();
@@ -28,8 +27,11 @@ public class BonVoyage {
         graph = utils.InputReader.getGraph();
         vehicleList = utils.InputReader.getVehicleList();
         */
-
-        Test.Execute();
+        System.out.println("Testing Scenario 1");
+        TestCenario1.Execute();
+        System.out.println("-------------------");
+        System.out.println("Testing Scenario 2");
+        TestCenario2.Execute();
     }
 
 }
