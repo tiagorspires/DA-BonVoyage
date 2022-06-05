@@ -38,6 +38,7 @@ public class Graph {
     }
 
 
+
     public void printGraph(){
         for (int source = 0; source < NumVertices; source++) {
             LinkedList<Edge> list = graph[source].adjacentes;
