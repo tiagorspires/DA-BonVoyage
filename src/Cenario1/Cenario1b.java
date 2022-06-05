@@ -16,11 +16,13 @@ public class Cenario1b {
 
     public static void execute(Graph graph, int start, int end) {
         solGraph = new Graph(graph.NumVertices);
-        maxFlow = maxFlow(graph, start, end);
-        System.out.println(maxFlow);
-        LinkedList<Integer> a = findMaxValuePath(graph, start, end);
-        System.out.println(a);
-        System.out.println(a.size() - 1);
+        //maxFlow = maxFlow(graph, start, end);
+        solGraph(start,end,MAX_VALUE);
+        //System.out.println(maxFlow);
+        //LinkedList<Integer> a = findMaxValuePath(graph, start, end);
+        LinkedList<Integer> b = findMinTransbordPath(graph, start, end);
+        System.out.println(b);
+        System.out.println(b.size() - 1);
     }
 
     private static int maxFlow(Graph graph, int start, int end){
@@ -49,6 +51,15 @@ public class Cenario1b {
         return max;
     }
 
+    private static void solGraph(int start,int end,int min){
+        if (start == end)return;
+        List<Edge> EdgeList = solGraph.getEdgeList(start);
+        for (Edge i :EdgeList){
+            i.setWeight(Math.min(i.getWeight(),min));
+            solGraph(i.getDestination(),end,Math.min(min,i.getWeight()));
+        }
+    }
+
     private static LinkedList<Integer> findMaxValuePath(Graph graph, int start, int end) {
         LinkedList<Integer> path = new LinkedList<>();
         LinkedList<Integer> max = new LinkedList<>();
@@ -73,30 +84,31 @@ public class Cenario1b {
 
 
     private static LinkedList<Integer> findMinTransbordPath(Graph graph, int start, int end) {
+
         LinkedList<Integer> path = new LinkedList<>();
         LinkedList<Integer> min = new LinkedList<>();
         List<Edge> edges = graph.getEdgeList(start);
 
-        int maxCapacity = 0;
         int minSize = MAX_VALUE;
         path.add(start);
         int max = 0;
         if (start != end) {
             for (Edge i:edges) {
                 if (i.getWeight() > 0) {
-                    if(max < i.getWeight()){
-                        max = i.getWeight();
-                    }
+
                     LinkedList<Integer> temp = findMinTransbordPath(graph, i.getDestination(), end);
                     if (temp.size() < minSize){
-                        maxCapacity =
+                        max= i.getWeight();
                         minSize = temp.size();
                         min = temp;
                     }
-
+                    if(temp.size() == minSize && max < i.getWeight()){
+                        min = temp;
+                    }
                 }
             }
         }
+        path.addAll(min);
 
         return path;
     }
