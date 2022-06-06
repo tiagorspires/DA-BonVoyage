@@ -1,6 +1,5 @@
 package Cenario2;
 
-import Cenario1.Cenario1b;
 import GraphManager.Edge;
 import GraphManager.Graph;
 
@@ -9,36 +8,56 @@ import java.util.List;
 
 
 import static java.lang.Integer.MAX_VALUE;
-import static java.lang.Integer.max;
 
 public class Cenario2c {
     static Graph solGraph;
     static int maxFlow;
     static LinkedList<Integer> path;
+    static LinkedList<LinkedList<Integer>> multiRoutes;
+    static Graph graph;
 
-    public static void execute(Graph graph,int start,int end, int size){
+    public static void execute(Graph graph,int start,int end){
         solGraph = new Graph(graph.NumVertices);
-        forwardGroup(graph,start,end,size);
+        multiRoutes = new LinkedList<>();
+        System.out.println("The larger Group we can accept for this destination is: " + forwardGroup(graph,start,end));
+        System.out.println("And here is the itinerary: " + multiRoutes);
     }
 
-    private static void forwardGroup(Graph graph, int start, int end, int size) {
-        LinkedList<LinkedList<Integer>> multiRoutes = new LinkedList<>();
-        while(size>0){
-            int maxFlow = maxFlow(graph,start,end); // it searches the max flow single route to forward a section of the group
-            LinkedList<Integer> singleRoute;
-            singleRoute = findPath(graph,start,end); // then it extracts the single path obtained and inserts it into the multi route
-            multiRoutes.add(singleRoute);
-            purgePath(singleRoute, maxFlow); // purges the single route obtained so it can not be chosen again in the next iteration of this function
-            size -= maxFlow;
+    private static int forwardGroup(Graph graph, int start, int end) {
+        int counter = 0;
+        do{
+            maxFlow = maxFlow(graph,start,end); // it searches the max flow single route to forward a section of the group
+            if(maxFlow>0) {
+                LinkedList<Integer> singleRoute = findPath(solGraph, start, end); // then it extracts the single path obtained and inserts it into the multi route
+                multiRoutes.add(singleRoute);
+                purgePath(graph,singleRoute, maxFlow); // purges the single route obtained, so it won't be chosen again in the next iteration of this function
+                counter+=maxFlow;
+                solGraph = new Graph(graph.NumVertices);
+            }
+        }while(maxFlow > 0 );
+        return counter;
+    }
+
+    private static void purgePath(Graph graph,LinkedList<Integer> singleRoute, int maxFlow) {
+        for(int j = 0; j< singleRoute.size();j++){
+            List<Edge> mylist = graph.getEdgeList(singleRoute.get(j));
+            //converted list to array to get constant complexity when getting a value
+            int[] route = new int[singleRoute.size()];
+            int a = 0;
+            for (int i:singleRoute) {
+                route[a] = i;
+                a++;
+            }
+
+            for (int i = 0;i < route.length-1;i++){
+                for (Edge e: mylist) {
+                    if (e.getDestination() == route[i+1]){
+                        e.setWeight(e.getWeight()-maxFlow);
+                    }
+                }
+            }
         }
-
     }
-
-    private static void purgePath(LinkedList<Integer> singleRoute, int maxFlow) {
-
-    }
-
-
 
     private static int maxFlow(Graph graph, int start, int end){
         if(start == end) return Integer.MAX_VALUE;
@@ -67,21 +86,18 @@ public class Cenario2c {
     }
 
     private static LinkedList<Integer> findPath(Graph graph, int start, int end){
-        path = new LinkedList<>();
-        LinkedList<Integer> max = new LinkedList<>();
+        LinkedList<Integer> path = new LinkedList<>();
         path.add(start);
-        int maximo = MAX_VALUE;
-        if(start != end){
-            for (int i = 0;i < graph.NumVertices;i++){
-                if (graph.getWeightOnEdge(start,i) >= maxFlow) {
-                    LinkedList<Integer> temp = findPath(graph,i,end);
-                    if (temp.size() < maximo){
-                        max = temp;
-                        maximo = temp.size();
-                    }
+        List<Edge> graphEdgeList = graph.getEdgeList(start);
+        while(start != end){
+            for (Edge i:graphEdgeList){
+                if (i.getWeight() >= maxFlow) {
+                    start = i.getDestination();
+                    path.add(i.getDestination());
+                    graphEdgeList = graph.getEdgeList(i.getDestination());
+                    break;
                 }
             }
-            path.addAll(max);
         }
         return path;
     }

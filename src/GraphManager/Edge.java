@@ -3,10 +3,17 @@ package GraphManager;
 public class Edge implements Comparable<Edge>{
     int destination;
     int weight;
+    int duration;
 
     public Edge(int destination, int weight) {
         this.destination = destination;
         this.weight = weight;
+        this.duration = 0;
+    }
+    public Edge(int destination, int weight, int duration) {
+        this.destination = destination;
+        this.weight = weight;
+        this.duration = duration;
     }
 
     @Override
@@ -34,5 +41,9 @@ public class Edge implements Comparable<Edge>{
 
     public void setWeight(int weight) {
         this.weight = weight;
+    }
+
+    public int getDeuration() {
+        return duration;
     }
 }

@@ -6,35 +6,65 @@ import GraphManager.Graph;
 import java.util.LinkedList;
 import java.util.List;
 
-
-import static java.lang.Integer.MAX_VALUE;
-
-public class Cenario2a {
+public class Cenario2d {
     static Graph solGraph;
     static int maxFlow;
     static LinkedList<Integer> path;
     static LinkedList<LinkedList<Integer>> multiRoutes;
     static Graph graph;
 
-    public static void execute(Graph graph,int start,int end, int size){
+    public static void execute(Graph graph,int start,int end){
         solGraph = new Graph(graph.NumVertices);
         multiRoutes = new LinkedList<>();
-        forwardGroup(graph,start,end,size);
-        System.out.println(multiRoutes);
+        System.out.println("The larger Group we can accept for this destination is: " + forwardGroup(graph,start,end));
+        System.out.println("And here is the itinerary: " + multiRoutes);
+        System.out.println(meeting(graph, multiRoutes));
     }
 
-    private static void forwardGroup(Graph graph, int start, int end, int size) {
+    private static int meeting(Graph graph, LinkedList<LinkedList<Integer>> routes) {
+        int min = 0;
+        for (LinkedList<Integer> route: routes) {
+            min = Math.max(min,findRouteDuration(graph,route));
+        }
+        return min;
+    }
+
+    private static int findRouteDuration(Graph graph, LinkedList<Integer> route) {
+        int counter = 0;
+        for(int j = 0; j < route.size();j++){
+            List<Edge> mylist = graph.getEdgeList(route.get(j));
+
+            int[] path = new int[route.size()];
+            int a = 0;
+            for (int i:route) {
+                path[a] = i;
+                a++;
+            }
+
+            for (int i = 0;i < path.length-1;i++){
+                for (Edge e: mylist) {
+                    if (e.getDestination() == path[i+1]){
+                        counter += e.getDeuration();
+                    }
+                }
+            }
+        }
+        return counter;
+    }
+
+    private static int forwardGroup(Graph graph, int start, int end) {
+        int counter = 0;
         do{
             maxFlow = maxFlow(graph,start,end); // it searches the max flow single route to forward a section of the group
-            LinkedList<Integer> singleRoute;
             if(maxFlow>0) {
-                singleRoute = findPath(solGraph, start, end); // then it extracts the single path obtained and inserts it into the multi route
+                LinkedList<Integer> singleRoute = findPath(solGraph, start, end); // then it extracts the single path obtained and inserts it into the multi route
                 multiRoutes.add(singleRoute);
-                purgePath(graph,singleRoute, maxFlow); // purges the single route obtained so it can not be chosen again in the next iteration of this function
-                size -= maxFlow;
+                purgePath(graph,singleRoute, maxFlow); // purges the single route obtained, so it won't be chosen again in the next iteration of this function
+                counter+=maxFlow;
                 solGraph = new Graph(graph.NumVertices);
             }
-        }while(size>0 && maxFlow > 0 );
+        }while(maxFlow > 0 );
+        return counter;
     }
 
     private static void purgePath(Graph graph,LinkedList<Integer> singleRoute, int maxFlow) {
@@ -57,8 +87,6 @@ public class Cenario2a {
             }
         }
     }
-
-
 
     private static int maxFlow(Graph graph, int start, int end){
         if(start == end) return Integer.MAX_VALUE;
@@ -100,7 +128,6 @@ public class Cenario2a {
                 }
             }
         }
-
         return path;
     }
 }
