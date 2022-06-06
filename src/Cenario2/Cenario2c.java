@@ -7,8 +7,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 
-import static java.lang.Integer.MAX_VALUE;
-
 public class Cenario2c {
     static Graph solGraph;
     static int maxFlow;

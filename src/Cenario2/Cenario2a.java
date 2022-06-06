@@ -7,7 +7,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 
-import static java.lang.Integer.MAX_VALUE;
 
 public class Cenario2a {
     static Graph solGraph;
@@ -87,6 +86,7 @@ public class Cenario2a {
     }
 
     private static LinkedList<Integer> findPath(Graph graph, int start, int end){
+
         LinkedList<Integer> path = new LinkedList<>();
         path.add(start);
         List<Edge> graphEdgeList = graph.getEdgeList(start);

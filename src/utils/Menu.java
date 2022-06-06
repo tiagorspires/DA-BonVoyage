@@ -1,7 +1,19 @@
 package utils;
 
+import Cenario1.Cenario1a;
+import Cenario1.Cenario1b;
+import Cenario2.*;
+import GraphManager.Graph;
+
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+
+/*
+*
+*
+*       THE MENU CLASS ALLOWS US TO DISPLAY AN ASCII MENU, TO HANDLE ALL THE DATA
+*
+* */
 
 public class Menu {
     static Scanner stdin;

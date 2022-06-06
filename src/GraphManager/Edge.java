@@ -43,7 +43,8 @@ public class Edge implements Comparable<Edge>{
         this.weight = weight;
     }
 
-    public int getDeuration() {
+    public int getDuration() {
         return duration;
     }
+
 }

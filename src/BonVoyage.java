@@ -1,38 +1,19 @@
 import GraphManager.Graph;
-import Tests.TestCenario1;
-import Tests.TestCenario2;
-import utils.Vehicle;
 
-import java.util.ArrayList;
+import java.io.FileNotFoundException;
+
+/*
+*
+*           THIS IS THE MAIN CLASS
+*               WE WISH YOU A BON VOYAGE
+*
+* */
 
 public class BonVoyage {
-    public static ArrayList<Vehicle> vehicleList;
     public static Graph graph;
 
-    public static void main(String[] args) {
-        vehicleList = new ArrayList<>();
-        //utils.Menu.displayMenu();
-
-
-        /*
-        int[][] grapho= {
-            {0,4,3,0,0},
-            {0,0,0,5,0},
-            {0,3,0,0,3},
-            {0,0,2,0,4},
-            {0,0,0,0,0}};
-
-
-
-        graph = utils.InputReader.getGraph();
-        vehicleList = utils.InputReader.getVehicleList();
-        */
-        System.out.println("Testing Scenario 1");
-        System.out.println();
-        TestCenario2.Execute();
-        System.out.println("-------------------");
-        //System.out.println("Testing Scenario 2");
-        //TestCenario2.Execute();
+    public static void main(String[] args) throws FileNotFoundException {
+        utils.Menu.display();
     }
 
 }

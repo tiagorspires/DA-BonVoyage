@@ -13,6 +13,10 @@ public class Cenario2d {
     static LinkedList<LinkedList<Integer>> multiRoutes;
     static Graph graph;
 
+    public static LinkedList<LinkedList<Integer>> getMultiRoutes() {
+        return multiRoutes;
+    }
+
     public static void execute(Graph graph,int start,int end){
         solGraph = new Graph(graph.NumVertices);
         multiRoutes = new LinkedList<>();
@@ -44,7 +48,7 @@ public class Cenario2d {
             for (int i = 0;i < path.length-1;i++){
                 for (Edge e: mylist) {
                     if (e.getDestination() == path[i+1]){
-                        counter += e.getDeuration();
+                        counter += e.getDuration();
                     }
                 }
             }

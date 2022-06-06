@@ -6,7 +6,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import static java.lang.Integer.MAX_VALUE;
-import static java.lang.Integer.MIN_VALUE;
 
 public class Cenario1b {
 
@@ -20,14 +19,15 @@ public class Cenario1b {
         maxFlow = maxFlow(graph, start, end);
         //System.out.println(maxFlow);
         solGraph(start,end,MAX_VALUE);
-        LinkedList<Integer> a = findMaxValuePath(solGraph, start, end);
-        LinkedList<Integer> b = findMinTransbordPath(solGraph, start, end);
+        if (maxFlow > 0) {
+            LinkedList<Integer> a = findMaxValuePath(solGraph, start, end);
+            LinkedList<Integer> b = findMinTransbordPath(solGraph, start, end);
 
-        if(b.size()==a.size()) {
+            if (b.size() == a.size()) {
                 System.out.println("MaxFlow: " + maxFlow);
                 System.out.println("Numero de transbordos: " + (a.size() - 1));
                 System.out.println("Path" + a);
-        }else if ((maxFlow == max1)){
+            } else if ((maxFlow == max1)) {
                 System.out.println("MaxFlow: " + max1);
                 System.out.println("Numero de transbordos: " + (b.size() - 1));
                 System.out.println("Path" + b);
@@ -35,11 +35,12 @@ public class Cenario1b {
                 System.out.println("MaxFlow: " + max1);
                 System.out.println("Numero de transbordos: " + (b.size() - 1));
                 System.out.println("Path" + b);
-                System.out.println("");
+                System.out.println();
                 System.out.println("MaxFlow: " + maxFlow);
                 System.out.println("Numero de transbordos: " + (a.size() - 1));
                 System.out.println("Path" + a);
 
+            }
         }
     }
 
