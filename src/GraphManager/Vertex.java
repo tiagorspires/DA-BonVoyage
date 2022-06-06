@@ -1,6 +1,5 @@
 package GraphManager;
 
-import java.util.HashSet;
 import java.util.LinkedList;
 
 public class Vertex {

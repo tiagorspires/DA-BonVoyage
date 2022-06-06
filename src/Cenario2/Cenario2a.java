@@ -37,22 +37,25 @@ public class Cenario2a {
         }while(size>0 && maxFlow > 0 );
     }
 
-    private static void purgePath(Graph graph,LinkedList<Integer> singleRoute, int maxFlow) {
-        for(int j = 0; j< singleRoute.size();j++){
-            List<Edge> mylist = graph.getEdgeList(singleRoute.get(j));
-            //converted list to array to get constant complexity when getting a value
-            int[] route = new int[singleRoute.size()];
-            int a = 0;
-            for (int i:singleRoute) {
-                route[a] = i;
-                a++;
-            }
+    private static void initSolGraph(int numVertices) {
 
-            for (int i = 0;i < route.length-1;i++){
-                for (Edge e: mylist) {
-                    if (e.getDestination() == route[i+1]){
-                        e.setWeight(e.getWeight()-maxFlow);
-                    }
+    }
+
+    private static void purgePath(Graph graph,LinkedList<Integer> singleRoute, int maxFlow) {
+        List<Edge> mylist = graph.getEdgeList(singleRoute.get(0));
+
+        //converted list to array to get constant complexity when getting a value
+        int[] route = new int[singleRoute.size()];
+        int a = 0;
+        for (int i:singleRoute) {
+            route[a] = i;
+            a++;
+        }
+
+        for (int i = 0;i < route.length-1;i++){
+            for (Edge e: mylist) {
+                if (e.getDestination() == route[i+1]){
+                    e.setWeight(e.getWeight()-maxFlow);
                 }
             }
         }

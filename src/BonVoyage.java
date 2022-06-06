@@ -28,8 +28,8 @@ public class BonVoyage {
         vehicleList = utils.InputReader.getVehicleList();
         */
         System.out.println("Testing Scenario 1");
-        System.out.println();
-        TestCenario2.Execute();
+        System.out.println("");
+        TestCenario1.Execute();
         System.out.println("-------------------");
         //System.out.println("Testing Scenario 2");
         //TestCenario2.Execute();

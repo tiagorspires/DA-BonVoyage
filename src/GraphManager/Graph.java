@@ -1,6 +1,5 @@
 package GraphManager;
 
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 /*
@@ -26,29 +25,15 @@ public class Graph {
         graph[source].addEdge(edge); //for directed graph
     }
 
-    public void addEdge(int source, int destination, int weight, int duration) {
-        Edge edge = new Edge(destination, weight, duration);
-        graph[source].addEdge(edge); //for directed graph
-    }
-
-    public LinkedList<Edge> getEdgeList(int source){
+    public List<Edge> getEdgeList(int source){
         return graph[source].getAdjacentes();
     }
 
     public int getWeightOnEdge(int source, int destination){
-        LinkedList<Edge> edges = getEdgeList(source);
+        List<Edge> edges = getEdgeList(source);
         for (Edge edge: edges) {
             if(destination == edge.destination)
                 return edge.weight;
-        }
-        return 0;
-    }
-
-    public int getDurationOnEdge(int source, int destination){
-        LinkedList<Edge> edges = getEdgeList(source);
-        for (Edge edge: edges) {
-            if(destination == edge.destination)
-                return edge.duration;
         }
         return 0;
     }
@@ -58,7 +43,7 @@ public class Graph {
             LinkedList<Edge> list = graph[source].adjacentes;
             for (Edge edge : list) {
                 System.out.println(" " + source + " ---> " +
-                        edge.destination + " (w,d) = (" + edge.weight + "," + edge.duration + ")");
+                        edge.destination + " w(" + edge.weight + ")");
             }
         }
     }
