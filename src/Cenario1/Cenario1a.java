@@ -14,7 +14,7 @@ public class Cenario1a {
     public static void execute(Graph graph,int start,int end){
         solGraph = new Graph(graph.NumVertices);
         maxFlow = maxFlow(graph,start,end);
-        path = findPath(graph,start,end);
+        path = findPath(solGraph,start,end);
     }
 
 
@@ -36,7 +36,7 @@ public class Cenario1a {
                     solGraph.addEdge(start, i.getDestination() ,-1);
                     int temp = Math.min(i.getWeight(), maxFlow(graph, i.getDestination(), end));
                     max = Math.max(temp,max);
-                    solGraph.addEdge(start, i.getDestination() ,max);
+                    solGraph.addEdge(start, i.getDestination() ,temp);
                 }
             }
         }

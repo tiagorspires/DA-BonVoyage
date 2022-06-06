@@ -81,7 +81,7 @@ public class Cenario2a {
                     solGraph.addEdge(start, i.getDestination() ,-1);
                     int temp = Math.min(i.getWeight(), maxFlow(graph, i.getDestination(), end));
                     max = Math.max(temp,max);
-                    solGraph.addEdge(start, i.getDestination() ,max);
+                    solGraph.addEdge(start, i.getDestination() ,temp);
                 }
             }
         }

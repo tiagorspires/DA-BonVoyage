@@ -12,17 +12,35 @@ public class Cenario1b {
 
     static Graph solGraph;
     static int maxFlow;
+    static int max1 = 0;
 
 
     public static void execute(Graph graph, int start, int end) {
         solGraph = new Graph(graph.NumVertices);
-        //maxFlow = maxFlow(graph, start, end);
-        solGraph(start,end,MAX_VALUE);
+        maxFlow = maxFlow(graph, start, end);
         //System.out.println(maxFlow);
-        //LinkedList<Integer> a = findMaxValuePath(graph, start, end);
-        LinkedList<Integer> b = findMinTransbordPath(graph, start, end);
-        System.out.println(b);
-        System.out.println(b.size() - 1);
+        solGraph(start,end,MAX_VALUE);
+        LinkedList<Integer> a = findMaxValuePath(solGraph, start, end);
+        LinkedList<Integer> b = findMinTransbordPath(solGraph, start, end);
+
+        if(b.size()==a.size()) {
+                System.out.println("MaxFlow: " + maxFlow);
+                System.out.println("Numero de transbordos: " + (a.size() - 1));
+                System.out.println("Path" + a);
+        }else if ((maxFlow == max1)){
+                System.out.println("MaxFlow: " + max1);
+                System.out.println("Numero de transbordos: " + (b.size() - 1));
+                System.out.println("Path" + b);
+            } else {
+                System.out.println("MaxFlow: " + max1);
+                System.out.println("Numero de transbordos: " + (b.size() - 1));
+                System.out.println("Path" + b);
+                System.out.println("");
+                System.out.println("MaxFlow: " + maxFlow);
+                System.out.println("Numero de transbordos: " + (a.size() - 1));
+                System.out.println("Path" + a);
+
+        }
     }
 
     private static int maxFlow(Graph graph, int start, int end){
@@ -43,7 +61,7 @@ public class Cenario1b {
                     solGraph.addEdge(start, i.getDestination() ,-1);
                     int temp = Math.min(i.getWeight(), maxFlow(graph, i.getDestination(), end));
                     max = Math.max(temp,max);
-                    solGraph.addEdge(start, i.getDestination() ,max);
+                    solGraph.addEdge(start, i.getDestination() ,temp);
                 }
             }
         }
@@ -55,8 +73,10 @@ public class Cenario1b {
         if (start == end)return;
         List<Edge> EdgeList = solGraph.getEdgeList(start);
         for (Edge i :EdgeList){
-            i.setWeight(Math.min(i.getWeight(),min));
-            solGraph(i.getDestination(),end,Math.min(min,i.getWeight()));
+            if (i.getWeight() > 0) {
+                i.setWeight(Math.min(i.getWeight(), min));
+                solGraph(i.getDestination(), end, Math.min(min, i.getWeight()));
+            }
         }
     }
 
@@ -90,18 +110,17 @@ public class Cenario1b {
 
         int minSize = MAX_VALUE;
         path.add(start);
-        int max = 0;
         if (start != end) {
             for (Edge i:edges) {
                 if (i.getWeight() > 0) {
 
                     LinkedList<Integer> temp = findMinTransbordPath(graph, i.getDestination(), end);
                     if (temp.size() < minSize){
-                        max= i.getWeight();
+                        max1= i.getWeight();
                         minSize = temp.size();
                         min = temp;
                     }
-                    if(temp.size() == minSize && max < i.getWeight()){
+                    if(temp.size() == minSize && max1 < i.getWeight()){
                         min = temp;
                     }
                 }
