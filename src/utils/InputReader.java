@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 /*
 *
-*       THIS CLASS IS DESIGNED TO EXTRACT
+*       THIS CLASS IS DESIGNED TO EXTRACT THE DATA FROM THE INPUT FILE LOCATED IN THE INPUT FOLDER
 *
 * */
 
@@ -15,6 +15,7 @@ public class InputReader {
     private static Graph graph;
     static Scanner reader;
 
+    /* The main function of the class, it reads from the chosen file and the returns the corresponding Graph */
     public static Graph read(String input) throws FileNotFoundException {
         File inputFile = new File(input);
         reader = new Scanner(inputFile);
@@ -25,8 +26,8 @@ public class InputReader {
             int origin = reader.nextInt();
             int destination = reader.nextInt();
             int capacity = reader.nextInt();
-            int cost = reader.nextInt();
-            graph.addEdge(origin-1,destination-1, capacity, cost);
+            int duration = reader.nextInt();
+            graph.addEdge(origin-1,destination-1, capacity, duration);
         }
         reader.close();
         return graph;

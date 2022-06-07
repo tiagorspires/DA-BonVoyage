@@ -1,5 +1,12 @@
 package GraphManager;
 
+/*
+*  Each edge stores a destination, allowing the connection between node 'a' and node 'b'
+*   it also stores the weight and a duration of each edge
+*
+*   It has two constructors, one of them missing the duration parameter for when it is not needed
+* */
+
 public class Edge implements Comparable<Edge>{
     int destination;
     int weight;
@@ -10,6 +17,7 @@ public class Edge implements Comparable<Edge>{
         this.weight = weight;
         this.duration = 0;
     }
+
     public Edge(int destination, int weight, int duration) {
         this.destination = destination;
         this.weight = weight;

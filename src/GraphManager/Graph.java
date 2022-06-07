@@ -5,6 +5,10 @@ import java.util.LinkedList;
 /*
 *  Directed and Weighted Graph
 *   Each node is numbered from 1 to N (number of nodes)
+*   public int NumVertices - the number of vertices on the graph
+*   Vertex[] graph - it stores an array of vertices, each one of the vertices store the corresponding node number and a List of Edges it has,
+*   therefore it indirectly corresponds to all vertices witch has a connection with it
+*
 * */
 
 
