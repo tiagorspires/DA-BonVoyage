@@ -22,20 +22,20 @@ public class Cenario1a {
 
     }
 
-
+    /*
+        This function finds the max flow on a single route in the graph
+     */
     private static int maxFlow(Graph graph, int start, int end){
         if(start == end) return Integer.MAX_VALUE;
         int max = 0;
-
         List<Edge> EdgeList = graph.getEdgeList(start);
-
         for (Edge i :EdgeList){
             if (i.getWeight() > 0){
                 if (i.getDestination() == end){
                     solGraph.addEdge(start, i.getDestination() ,i.getWeight());
                     return i.getWeight();
                 }
-                if (solGraph.getWeightOnEdge(start,i.getDestination()) >= 0){
+                if (solGraph.getWeightOnEdge(start,i.getDestination()) > 0){
                     return solGraph.getWeightOnEdge(start,i.getDestination());
                 }else if (solGraph.getWeightOnEdge(start,i.getDestination()) == -1){
                     return 0;
@@ -56,7 +56,9 @@ public class Cenario1a {
         LinkedList<Integer> path = new LinkedList<>();
         path.add(start);
         List<Edge> graphEdgeList = graph.getEdgeList(start);
+        //it searches the solgraph for the path with maxFlow
         while(start != end){
+
             for (Edge i:graphEdgeList){
                 if (i.getWeight() >= maxFlow) {
                     start = i.getDestination();
