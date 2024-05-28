@@ -1,5 +1,7 @@
 # DAG107TP2 - BonVoyage
 
+## Contributors
+
 | Name                          | Number    | E-mail                   |
 |-------------------------------|-----------|--------------------------|
 | Naldo Neves Monteiro Delgado  | 201808613 | up201808613@edu.fc.up.pt |
